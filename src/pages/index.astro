@@ -1,0 +1,27 @@
+---
+import Parser from "rss-parser";
+import DefaultLayout from "../layouts/DefaultLayout.astro";
+import type { ArchUpdate } from "../types/ArchUpdate.types";
+
+const latestRes = await fetch("http://localhost:4321/api/getLatest.json");
+const latest = (await latestRes.json()) as ArchUpdate;
+
+console.log({
+  log: "itemCheck",
+  latest,
+});
+---
+
+<DefaultLayout title={"pacman.Syu"}>
+  <h1 class="text-sky-200">
+    what do I need to do before I update arch so I don't break my install
+  </h1>
+  <h1 class="text-3xl font-bold mb-2">{latest.title}</h1>
+  <p class="text-sm text-gray-600 mb-4">
+    {new Date(latest.publishDate).toString()}
+  </p>
+  <div
+    class="prose"
+    set:html={latest.html}
+  />
+</DefaultLayout>

@@ -1,0 +1,31 @@
+---
+import { GoogleFontsOptimizer } from "astro-google-fonts-optimizer";
+import "../styles/global.css";
+
+type Props = {
+  title: string;
+  description?: string;
+};
+
+const props = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>{props.title}</title>
+    <GoogleFontsOptimizer
+      url="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;1,300&display=swap"
+    />
+  </head>
+  <body class="bg-zinc-700 font-mono">
+    <main>
+      <slot />
+    </main>
+  </body>
+</html>
