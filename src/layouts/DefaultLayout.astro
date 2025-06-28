@@ -33,6 +33,47 @@ const props = Astro.props;
         color: var(--color-sky-400);
         margin: 1rem 0;
       }
+
+      /* Text Hierarchy */
+      h1 {
+        font-size: var(--text-3xl);
+        font-weight: 900;
+        color: var(--color-sky-100);
+        line-height: 1.2;
+      }
+
+      h2 {
+        font-size: var(--text-xl);
+        font-weight: 800;
+        color: var(--color-sky-200);
+        line-height: 1.3;
+      }
+
+      h3 {
+        font-size: var(--text-lg);
+        font-weight: 700;
+        color: var(--color-sky-300);
+        line-height: 1.4;
+      }
+
+      p {
+        font-size: var(--text-sm);
+        color: var(--color-sky-300);
+        line-height: 1.6;
+        margin: 1rem 0;
+      }
+
+      .rss-html > p {
+        border-left: solid 1px var(--color-sky-300);
+        padding-left: calc(0.875rem / 2);
+      }
+
+      .lead {
+        font-size: var(--text-base);
+        color: var(--color-sky-200);
+        font-style: italic;
+        margin-bottom: 2rem;
+      }
     </style></head
   >
 
