@@ -1,27 +1,39 @@
 ---
-import Parser from "rss-parser";
+import { DateTime } from "luxon";
 import DefaultLayout from "../layouts/DefaultLayout.astro";
 import type { ArchUpdate } from "../types/ArchUpdate.types";
 
 const latestRes = await fetch("http://localhost:4321/api/getLatest.json");
 const latest = (await latestRes.json()) as ArchUpdate;
 
-console.log({
-  log: "itemCheck",
-  latest,
-});
+const localFormattedDate = DateTime.fromISO(
+  latest.publishDate as unknown as string
+).toLocaleString(DateTime.DATETIME_FULL);
 ---
 
 <DefaultLayout title={"pacman.Syu"}>
-  <h1 class="text-sky-200">
-    what do I need to do before I update arch so I don't break my install
-  </h1>
-  <h1 class="text-3xl font-bold mb-2">{latest.title}</h1>
-  <p class="text-sm text-gray-600 mb-4">
-    {new Date(latest.publishDate).toString()}
-  </p>
   <div
-    class="prose"
-    set:html={latest.html}
-  />
+    class="min-w-screen min-h-dvh flex items-center justify-center flex-col p-8"
+  >
+    <div class="">
+      <h1 class="text-sky-100 text-center text-xl font-extrabold">
+        what do I need to do before I update arch so I don't break my install?
+      </h1>
+      <p class="text-sm text-sky-300 mt-4 mb-8 text-center italic">
+        if you haven't updated since <u>{localFormattedDate}</u>, check the
+        following:
+      </p>
+      <div class="max-w-[80%] mx-auto">
+        <h2
+          class="text-lg text-center text-balance font-extrabold mb-4 text-sky-600"
+        >
+          {latest.title}
+        </h2>
+        <div
+          class="prose text-sm text-sky-300"
+          set:html={latest.html}
+        />
+      </div>
+    </div>
+  </div>
 </DefaultLayout>

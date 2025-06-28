@@ -1,10 +1,8 @@
 import { ArchUpdate, db, DbRefresh } from "astro:db";
-import { ArchUpdate as ArchUpdateType } from "./config";
 import Parser from "rss-parser";
 import type { ArchRSSUpdate } from "../src/types/ArchRSSUpdate.type";
 import { v4 as uuidv4 } from "uuid";
 
-// https://astro.build/db/seed
 export default async function seed() {
   const parser = new Parser();
   const feed = await parser.parseURL("https://archlinux.org/feeds/news/");
