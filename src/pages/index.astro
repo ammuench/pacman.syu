@@ -15,28 +15,26 @@ const localFormattedDate = DateTime.fromISO(
   <div
     class="min-w-screen min-h-dvh flex items-center justify-center flex-col p-8"
   >
-    <div class="">
-      <h1 class="text-center">
-        what do I need to do before I update arch so I don't break my install?
-      </h1>
-      <p class="lead text-center mt-4 mb-8">
-        if you haven't updated since <u>{localFormattedDate}</u>, check the
-        following:
-      </p>
-      <div class="max-w-[80%] mx-auto">
-        <h2 class="text-left text-balance mb-4 hover:underline">
-          <a
-            href={latest.link}
-            target="_blank"
-          >
-            {latest.title}
-          </a>
-        </h2>
-        <div
-          class="text-left rss-html"
-          set:html={latest.html}
-        />
-      </div>
+    <h1 class="text-center">
+      what do I need to do before I update arch so I don't break my install?
+    </h1>
+    <p class="lead text-center mt-4 mb-8">
+      if you haven't updated since <u>{localFormattedDate}</u>, check the
+      following:
+    </p>
+    <div class="max-w-[80%] mx-auto">
+      <h2 class="text-left text-balance mb-4 hover:underline">
+        <a
+          href={latest.link}
+          target="_blank"
+        >
+          {latest.title}
+        </a>
+      </h2>
+      <div
+        class="text-left rss-html"
+        set:html={latest.html}
+      />
     </div>
   </div>
 </DefaultLayout>
