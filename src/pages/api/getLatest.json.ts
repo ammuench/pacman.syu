@@ -43,7 +43,6 @@ export const GET: APIRoute = async () => {
   const now = new Date();
   if (!lastUpdate || now.getTime() - lastUpdate.getTime() > 15 * 60 * 1000) {
     await updateRss();
-    // TODO: refetch or update lastUpdate timestamp and return updated items
   }
   const updates = await db
     .select()

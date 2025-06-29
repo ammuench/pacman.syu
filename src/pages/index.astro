@@ -1,9 +1,14 @@
 ---
+export const prerender = false;
+export const ssr = true;
+
 import { DateTime } from "luxon";
 import DefaultLayout from "../layouts/DefaultLayout.astro";
 import type { ArchUpdate } from "../types/ArchUpdate.types";
 
-const latestRes = await fetch("http://localhost:4321/api/getLatest.json");
+const { request } = Astro;
+const origin = new URL(request.url).origin;
+const latestRes = await fetch(new URL("/api/getLatest.json", origin));
 const latest = (await latestRes.json()) as ArchUpdate;
 
 const localFormattedDate = DateTime.fromISO(
