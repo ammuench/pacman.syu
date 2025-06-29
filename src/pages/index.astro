@@ -24,9 +24,12 @@ const localFormattedDate = DateTime.fromISO(
       what do I need to do before I update arch so I don't break my install?
     </h1>
     <p class="lead text-center mt-4 mb-8">
-      if you haven't updated since <u>{localFormattedDate}</u>, check the
-      following:
+      if you haven't updated since <span class="underline text-nowrap"
+        >{localFormattedDate}</span
+      >, check the following
     </p>
+    <div class="h-[1px] w-full my-6 border-b border-b-sky-200 border-dashed">
+    </div>
     <div class="max-w-[80%] mx-auto">
       <h2 class="text-left text-balance mb-4 hover:underline">
         <a
