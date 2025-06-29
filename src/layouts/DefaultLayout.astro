@@ -19,7 +19,63 @@ const props = Astro.props;
       name="viewport"
       content="width=device-width, initial-scale=1.0"
     />
-    <title>{props.title}</title>
+    <title>{props.title || "pacman -Syu"}</title>
+    <meta
+      name="title"
+      content="pacman -Syu"
+    />
+    <meta
+      name="description"
+      content="what do I need to do before I update arch so I don't break my install?
+    "
+    />
+
+    <!-- Open Graph / Facebook -->
+    <meta
+      property="og:type"
+      content="website"
+    />
+    <meta
+      property="og:url"
+      content="https://pacman.syu.computer/"
+    />
+    <meta
+      property="og:title"
+      content="pacman -Syu"
+    />
+    <meta
+      property="og:description"
+      content="what do I need to do before I update arch so I don't break my install?
+    "
+    />
+    <meta
+      property="og:image"
+      content="https://pacman.syu.computer/meta.png"
+    />
+
+    <!-- Twitter -->
+    <meta
+      property="twitter:card"
+      content="summary_large_image"
+    />
+    <meta
+      property="twitter:url"
+      content="https://pacman.syu.computer/"
+    />
+    <meta
+      property="twitter:title"
+      content="pacman -Syu"
+    />
+    <meta
+      property="twitter:description"
+      content="what do I need to do before I update arch so I don't break my install?
+    "
+    />
+    <meta
+      property="twitter:image"
+      content="https://metatags.io/images/meta-tags.png"
+    />
+
     <GoogleFontsOptimizer
       url="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;1,900&display=swap"
     />
