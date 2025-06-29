@@ -1,5 +1,6 @@
 ---
 import { GoogleFontsOptimizer } from "astro-google-fonts-optimizer";
+import Footer from "../components/Footer.astro";
 import "../styles/global.css";
 
 type Props = {
@@ -36,7 +37,6 @@ const props = Astro.props;
         scrollbar-width: none;
       }
 
-      /* Text Hierarchy */
       h1 {
         font-size: var(--text-3xl);
         font-weight: 900;
@@ -81,7 +81,6 @@ const props = Astro.props;
         flex-direction: row;
         justify-content: flex-end;
       }
-
       .copy-btn {
         cursor: pointer;
         padding: 0.25rem;
@@ -98,6 +97,7 @@ const props = Astro.props;
     <main>
       <slot />
     </main>
+    <Footer />
   </body><script>
     document.querySelectorAll<HTMLPreElement>("pre").forEach((pre) => {
       pre.style.position = "relative";
