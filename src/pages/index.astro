@@ -2,7 +2,6 @@
 export const prerender = false;
 export const ssr = true;
 
-import { DateTime } from "luxon";
 import DefaultLayout from "../layouts/DefaultLayout.astro";
 import type { ArchUpdate } from "../types/ArchUpdate.types";
 
@@ -10,10 +9,6 @@ const { request } = Astro;
 const origin = new URL(request.url).origin;
 const latestRes = await fetch(new URL("/api/getLatest.json", origin));
 const latest = (await latestRes.json()) as ArchUpdate;
-
-const localFormattedDate = DateTime.fromISO(
-  latest.publishDate as unknown as string
-).toLocaleString(DateTime.DATETIME_FULL);
 ---
 
 <DefaultLayout title="pacman -Syu">
@@ -24,10 +19,23 @@ const localFormattedDate = DateTime.fromISO(
       what do I need to do before I update arch so I don't break my install?
     </h1>
     <p class="lead text-center mt-4 mb-8">
-      if you haven't updated since <span class="underline text-nowrap"
-        >{localFormattedDate}</span
-      >, check the following
+      if you haven't updated since <span class="underline text-nowrap date-txt"
+        >{
+          new Intl.DateTimeFormat("en-US", {
+            dateStyle: "full",
+            timeStyle: "long",
+          }).format(new Date(latest.publishDate))
+        }
+      </span>, check the following
     </p>
+    <script is:inline>
+      const localTime = new Intl.DateTimeFormat("en-US", {
+        dateStyle: "full",
+        timeStyle: "long",
+      }).format(new Date(latest.publishDate));
+
+      document.querySelector(".date-txt").innerHTML = localTime.trim();
+    </script>
     <div class="h-[1px] w-full my-6 border-b border-b-sky-200 border-dashed">
     </div>
     <div class="max-w-[80%] mx-auto">
