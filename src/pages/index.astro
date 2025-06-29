@@ -19,22 +19,35 @@ const latest = (await latestRes.json()) as ArchUpdate;
       what do I need to do before I update arch so I don't break my install?
     </h1>
     <p class="lead text-center mt-4 mb-8">
-      if you haven't updated since <span class="underline text-nowrap date-txt"
-        >{
-          new Intl.DateTimeFormat("en-US", {
-            dateStyle: "full",
-            timeStyle: "long",
-          }).format(new Date(latest.publishDate))
-        }
+      if you haven't updated since
+      <span
+        class="underline text-nowrap date-txt"
+        data-pubdate={latest.publishDate}
+      >
+        {new Intl.DateTimeFormat("en-US", {
+          dateStyle: "full",
+          timeStyle: "long",
+        }).format(new Date(latest.publishDate))}
       </span>, check the following
     </p>
     <script is:inline>
-      const localTime = new Intl.DateTimeFormat("en-US", {
-        dateStyle: "full",
-        timeStyle: "long",
-      }).format(new Date(latest.publishDate));
+      (() => {
+        const dateElement = document.querySelector(".date-txt");
+        const rawDateVal = dateElement.getAttribute("data-pubdate");
+        if (!rawDateVal) {
+          return;
+        }
+        try {
 
-      document.querySelector(".date-txt").innerHTML = localTime.trim();
+        const parsedDate = new Date(rawDateVal);
+        dateElement.textContent = parsedDate.toLocaleString("en-US", {
+          dateStyle: "full",
+          timeStyle: "long",
+        });
+        } catch {
+          console.error('Unable to parse date, falling back to server date')
+        }
+      })();
     </script>
     <div class="h-[1px] w-full my-6 border-b border-b-sky-200 border-dashed">
     </div>
