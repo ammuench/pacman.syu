@@ -24,10 +24,12 @@ const latest = (await latestRes.json()) as ArchUpdate;
         class="underline text-nowrap date-txt"
         data-pubdate={latest.publishDate}
       >
-        {new Intl.DateTimeFormat("en-US", {
-          dateStyle: "full",
-          timeStyle: "long",
-        }).format(new Date(latest.publishDate))}
+        {
+          new Intl.DateTimeFormat("en-US", {
+            dateStyle: "full",
+            timeStyle: "long",
+          }).format(new Date(latest.publishDate))
+        }
       </span>, check the following
     </p>
     <script is:inline>
@@ -38,14 +40,13 @@ const latest = (await latestRes.json()) as ArchUpdate;
           return;
         }
         try {
-
-        const parsedDate = new Date(rawDateVal);
-        dateElement.textContent = parsedDate.toLocaleString("en-US", {
-          dateStyle: "full",
-          timeStyle: "long",
-        });
+          const parsedDate = new Date(rawDateVal);
+          dateElement.textContent = parsedDate.toLocaleString("en-US", {
+            dateStyle: "full",
+            timeStyle: "long",
+          });
         } catch {
-          console.error('Unable to parse date, falling back to server date')
+          console.error("Unable to parse date, falling back to server date");
         }
       })();
     </script>

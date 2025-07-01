@@ -10,7 +10,7 @@ export const ArchUpdate = defineTable({
   columns: {
     id: column.text({ primaryKey: true }),
     title: column.text(),
-    link: column.text(),
+    link: column.text({ unique: true }),
     publishDate: column.date(),
     html: column.text(),
   },

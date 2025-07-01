@@ -20,16 +20,17 @@ async function updateRss() {
   });
 
   try {
-    await db.insert(ArchUpdate).values(dbRecords);
+    await db.insert(ArchUpdate).values(dbRecords).onConflictDoNothing();
   } catch (e) {
+    console.error("RSS UPDATE ERR:");
     console.error(e);
   }
 
-  const now = new Date();
-
   try {
-    await db.insert(DbRefresh).values([{ lastUpdate: now }]);
+    const now = new Date();
+    await db.update(DbRefresh).set({ lastUpdate: now });
   } catch (e) {
+    console.error("DATE SET ERR:");
     console.error(e);
   }
 }
@@ -38,10 +39,12 @@ export const GET: APIRoute = async () => {
   const refresh = await db
     .select({ lastUpdate: DbRefresh.lastUpdate })
     .from(DbRefresh)
-    .all();
+    .limit(1);
   const lastUpdate = refresh[0]?.lastUpdate;
   const now = new Date();
-  if (!lastUpdate || now.getTime() - lastUpdate.getTime() > 15 * 60 * 1000) {
+
+  const FIFTEEN_MIN = 15 * 60 * 1000;
+  if (!lastUpdate || now.getTime() - lastUpdate.getTime() > FIFTEEN_MIN) {
     await updateRss();
   }
   const updates = await db
